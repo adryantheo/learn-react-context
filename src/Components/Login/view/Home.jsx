@@ -1,26 +1,39 @@
-import React from 'react';
+import React, {Suspense, useState} from 'react';
 import {useCookies} from 'react-cookie';
+const NameInput = React.lazy(async () => import('./NameInput'));
 
 export default function Home(){
     const [cookies, setCookies, removeCookie] = useCookies(['name']);
+    const [name, setName] = useState('');
 
-    function handleCookie(){
-        setCookies('name', 'Teo', {
+    function handleCookie(nama){
+        setCookies('name', nama, {
             path: '/',
-            maxAge: 3
+            maxAge: 3 //satuan second aka: ini cuma ada 3 second
         });
+        window.location.reload();
         // document.cookie = "name=A Theo; path=/";
     }
 
     function removeCok(){
         removeCookie('name');
     }
+    function setNama(){
+        setName('');
+        const val = document.getElementById('nama').value;
+        setName(val);
+        handleCookie(val);
+        console.log(name);
+    }
 
 
     return(
-        <div>
+        <div style={{alignItems: 'center', textAlign: 'center'}}>
             <h1>Hello World</h1>
-            <button onClick={handleCookie}>Set Cookie</button>
+            <Suspense fallback={<h2 style={{textAlign: 'center'}}>Loading</h2>}>
+                <NameInput />
+            </Suspense> 
+            <button onClick={setNama}>Set Cookie</button>
             <button onClick={removeCok}>Remove Cookie</button>
         </div>
     );
