@@ -17,6 +17,7 @@ export default function Home(){
 
     function removeCok(){
         removeCookie('name');
+        window.location.reload();
     }
     function setNama(){
         setName('');

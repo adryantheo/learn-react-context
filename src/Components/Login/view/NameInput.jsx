@@ -20,7 +20,7 @@ export default function NameInput(props){
 
     return(
         <div style={{paddingTop: '20px', paddingBottom: '20px'}}>
-            <input id="nama" type="text" placeholder="Masukkan Nama" value={nama} onChange={e => onTodo(e.target.value)} />
+            <input id="nama" type="text" placeholder="Masukkan Nama" value={nama} onChange={(e) => onTodo(e.target.value)} />
             <button onClick={async() => setNama('')}>Hapus Nama</button>
         </div>
     )
